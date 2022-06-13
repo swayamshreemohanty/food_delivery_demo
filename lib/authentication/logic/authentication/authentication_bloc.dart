@@ -8,7 +8,6 @@ part 'authentication_state.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc() : super(AuthenticationUninitialized()) {
-
     on<AuthenticationEvent>(
       (event, emit) async {
         if (event is AppStarted) {
@@ -20,7 +19,7 @@ class AuthenticationBloc
           }
         } else if (event is LoggedIn) {
           emit(AuthenticationLoading());
-          AuthenticationAuthenticated();
+          emit(AuthenticationAuthenticated());
         } else if (event is LoggedOut) {
           emit(AuthenticationLoading());
           FirebaseAuth.instance.signOut();
