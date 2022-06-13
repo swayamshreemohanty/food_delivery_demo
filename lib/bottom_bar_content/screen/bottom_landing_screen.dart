@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery/bottom_bar_content/home/screens/home_screen.dart';
 import 'package:food_delivery/bottom_bar_content/logic/go_to_home/go_to_home_cubit.dart';
 import 'package:food_delivery/demo_screens/activity_screen.dart';
@@ -7,6 +8,7 @@ import 'package:food_delivery/demo_screens/articles_screen.dart';
 import 'package:food_delivery/demo_screens/bookmark_screen.dart';
 import 'package:food_delivery/demo_screens/cart_screen.dart';
 import 'package:food_delivery/utility/tools/responsive_handler.dart';
+import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 class BottomLandingScreen extends StatefulWidget {
   static const routeName = '/';
@@ -51,6 +53,8 @@ class _BottomLandingScreenState extends State<BottomLandingScreen> {
       body: _gotoPage(),
       bottomNavigationBar: BlocListener<GoToHomeCubit, GoToHomeState>(
         listener: (_, state) {
+          print('*********************');
+          print(state);
           if (state is GoToHomeTriggered) {
             selectPageIndex(0);
           } else if (state is GoToIndex) {
@@ -59,43 +63,46 @@ class _BottomLandingScreenState extends State<BottomLandingScreen> {
         },
         child: ResponsiveWidget.isDesktop(context)
             ? const SizedBox.shrink()
-            : BottomNavigationBar(
-                iconSize: 35,
-                onTap: selectPageIndex,
-                unselectedItemColor: Colors.grey.shade400,
-                selectedItemColor: Colors.red,
+            : StylishBottomBar(
+                onTap: (index) {
+                  selectPageIndex(index ?? 0);
+                },
+                iconSize: 35.sp,
+                opacity: 0.3,
                 currentIndex: _selectedPageIndex,
-                type: BottomNavigationBarType.shifting,
-                items: const [
-                  BottomNavigationBarItem(
-                    tooltip: "Home Page",
-                    backgroundColor: Colors.white,
-                    icon: Icon(Icons.home),
-                    label: '',
+                barAnimation: BarAnimation.fade,
+                iconStyle: IconStyle.animated,
+                hasNotch: true,
+                // fabLocation: StylishBarFabLocation.center,
+                items: [
+                  AnimatedBarItems(
+                    icon: const Icon(
+                      Icons.house_outlined,
+                    ),
+                    // selectedIcon: const Icon(Icons.house_rounded),
+                    // selectedColor: Colors.deepPurple,
+                    // backgroundColor: Colors.amber,
+                    title: const Text(''),
                   ),
-                  BottomNavigationBarItem(
-                    tooltip: "Artticles",
+                  AnimatedBarItems(
                     backgroundColor: Colors.white,
-                    icon: Icon(Icons.book),
-                    label: '',
+                    icon: const Icon(Icons.book),
+                    title: const Text(''),
                   ),
-                  BottomNavigationBarItem(
-                    tooltip: "Cart",
+                  AnimatedBarItems(
                     backgroundColor: Colors.white,
-                    icon: Icon(Icons.shopping_bag_outlined),
-                    label: '',
+                    icon: const Icon(Icons.shopping_bag_outlined),
+                    title: const Text(''),
                   ),
-                  BottomNavigationBarItem(
-                    tooltip: "Bookmark",
+                  AnimatedBarItems(
                     backgroundColor: Colors.white,
-                    icon: Icon(Icons.bookmark),
-                    label: '',
+                    icon: const Icon(Icons.bookmark),
+                    title: const Text(''),
                   ),
-                  BottomNavigationBarItem(
-                    tooltip: "Notification",
+                  AnimatedBarItems(
                     backgroundColor: Colors.white,
-                    icon: Icon(Icons.notifications),
-                    label: '',
+                    icon: const Icon(Icons.notifications),
+                    title: const Text(''),
                   ),
                 ],
               ),
