@@ -3,24 +3,28 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthenticationRepository {
   final firebaseAuth = FirebaseAuth.instance;
 
-  Future<String> authenticate({
-    String? userName,
-    String? phoneNumber,
+  Future<void> authenticate({
     required String userEmail,
     required String password,
+    required bool isLogin,
   }) async {
     try {
-      var _body = {
-        'email': userEmail,
-        'password': password,
-      };
-      final loginResponse = await firebaseAuth.signInWithEmailAndPassword(
-        email: userEmail,
-        password: password,
-      );
-      print('*************');
-      print(loginResponse);
-      return "";
+      //Log in the user
+      if (isLogin) {
+        await firebaseAuth.signInWithEmailAndPassword(
+          email: userEmail,
+          password: password,
+        );
+      }
+
+      //SignUp/Register the user
+      else {
+        await firebaseAuth.createUserWithEmailAndPassword(
+          email: userEmail,
+          password: password,
+        );
+      }
+      return;
     } catch (error) {
       rethrow;
     }
