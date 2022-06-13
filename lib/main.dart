@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery/authentication/logic/authentication/authentication_bloc.dart';
 import 'package:food_delivery/authentication/logic/login/login_bloc.dart';
 import 'package:food_delivery/authentication/screen/authscreen.dart';
+import 'package:food_delivery/bottom_bar_content/logic/go_to_home/go_to_home_cubit.dart';
 import 'package:food_delivery/bottom_bar_content/screen/bottom_landing_screen.dart';
 import 'package:food_delivery/config/routes/application_page_routes.dart';
 import 'package:food_delivery/firebase_options.dart';
@@ -48,6 +49,9 @@ class _MyAppState extends State<MyApp> {
           create: (context) => LoginBloc(
             authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
           ),
+        ),
+        BlocProvider<GoToHomeCubit>(
+          create: (context) => GoToHomeCubit(),
         ),
       ],
       child: ScreenUtilInit(
