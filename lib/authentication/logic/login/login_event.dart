@@ -7,14 +7,16 @@ abstract class LoginEvent extends Equatable {
 class LoginButtonPressed extends LoginEvent {
   final String userEmail;
   final String password;
+  final bool isLogin;
 
   const LoginButtonPressed({
     required this.userEmail,
     required this.password,
+    required this.isLogin,
   });
 
   @override
-  List<Object> get props => [userEmail, password];
+  List<Object> get props => [userEmail, password, isLogin];
 
   @override
   String toString() =>
