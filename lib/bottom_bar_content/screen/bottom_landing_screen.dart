@@ -70,7 +70,7 @@ class _BottomLandingScreenState extends State<BottomLandingScreen> {
                   BottomNavigationBarItem(
                     tooltip: "Home Page",
                     backgroundColor: Colors.white,
-                    icon: Icon(Icons.music_note),
+                    icon: Icon(Icons.home),
                     label: '',
                   ),
                   BottomNavigationBarItem(
