@@ -11,12 +11,7 @@ class AppStarted extends AuthenticationEvent {
 
 class AnonymousLogin extends AuthenticationEvent {}
 
-class LoggedIn extends AuthenticationEvent {
-  final TokenData tokenData;
-  LoggedIn({required this.tokenData});
-  @override
-  String toString() => 'LoggedIn { token: $tokenData}';
-}
+class LoggedIn extends AuthenticationEvent {}
 
 class LoggedOut extends AuthenticationEvent {
   @override
