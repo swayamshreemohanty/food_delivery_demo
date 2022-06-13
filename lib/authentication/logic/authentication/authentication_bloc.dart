@@ -1,40 +1,30 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_delivery/authentication/model/token_model.dart';
-import 'package:food_delivery/authentication/shared_preference/token_shared_pref.dart';
+import 'package:food_delivery/utility/firebase_current_user_data.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc() : super(AuthenticationUninitialized()) {
-    final tokenHandler = TokenSharedPref();
 
     on<AuthenticationEvent>(
       (event, emit) async {
         if (event is AppStarted) {
-          await tokenHandler.hasToken().then((value) async {
-            if (value) {
-              emit(AuthenticationAuthenticated());
-            } else {
-              try {
-                emit(AuthenticationUnauthenticated());
-              } catch (e) {
-                emit(AuthenticationUnauthenticated());
-              }
-            }
-          });
+          final currentUser = FirebaseCurrentUserData().userDetails;
+          if (currentUser != null) {
+            emit(AuthenticationAuthenticated());
+          } else {
+            emit(AuthenticationUnauthenticated());
+          }
         } else if (event is LoggedIn) {
           emit(AuthenticationLoading());
-          await tokenHandler
-              .storeToken(event.tokenData)
-              .then((value) => emit(AuthenticationAuthenticated()));
+          AuthenticationAuthenticated();
         } else if (event is LoggedOut) {
           emit(AuthenticationLoading());
-
-          await tokenHandler
-              .deleteToken()
-              .whenComplete(() => emit(AuthenticationUnauthenticated()));
+          FirebaseAuth.instance.signOut();
+          emit(AuthenticationUnauthenticated());
         } else if (event is AnonymousLogin) {
           emit(AuthenticationLoading());
           emit(AuthenticatedAnonymously());
