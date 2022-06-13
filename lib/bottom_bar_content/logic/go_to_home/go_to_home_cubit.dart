@@ -5,6 +5,7 @@ part 'go_to_home_state.dart';
 class GoToHomeCubit extends Cubit<GoToHomeState> {
   GoToHomeCubit() : super(GoToHomeInitial());
   Future<void> goToHomeHome() async {
+    print("Going to home");
     emit(GoToHomeInitial());
     emit(GoToHomeTriggered());
     return;
