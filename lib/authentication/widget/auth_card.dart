@@ -64,6 +64,7 @@ class _AuthCardState extends State<AuthCard>
             LoginButtonPressed(
               userEmail: _userEmailController.text,
               password: _passwordController.text,
+              isLogin: _authMode == AuthMode.login,
             ),
           );
     }
@@ -81,9 +82,6 @@ class _AuthCardState extends State<AuthCard>
     }
   }
 
-  String? emailErrorMessage;
-  String? phoneErrorMessage;
-
   userEmail() => TextFormField(
         key: const ValueKey('Email'),
         controller: _userEmailController,
@@ -91,7 +89,6 @@ class _AuthCardState extends State<AuthCard>
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           hintText: 'Email',
-          errorText: emailErrorMessage,
           contentPadding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(32.0),
@@ -100,7 +97,6 @@ class _AuthCardState extends State<AuthCard>
         cursorColor: Colors.black,
         keyboardType: TextInputType.emailAddress,
         validator: (value) {
-          emailErrorMessage = null;
           if (value!.isEmpty) {
             return "Field can't be empty";
           } else if (!value.contains('@')) {
@@ -178,6 +174,7 @@ class _AuthCardState extends State<AuthCard>
       );
   submitButton() => ElevatedButton(
         style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all(Colors.black),
           padding: MaterialStateProperty.all(EdgeInsets.symmetric(
             horizontal: 150.w,
             vertical: 18.h,
@@ -229,65 +226,55 @@ class _AuthCardState extends State<AuthCard>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          BlocListener<LoginBloc, LoginState>(
-            listener: (context, state) {
-              if (state is LoginFailureByEmail) {
-                setState(() {
-                  emailErrorMessage = state.rawError;
-                });
-              }
-            },
-            child: userEmail(),
-          ),
+          userEmail(),
           password(),
           if (_authMode == AuthMode.signup) confirmPassword(),
-          if (_authMode == AuthMode.signup)
-            BlocConsumer<LoginBloc, LoginState>(
-              listener: (context, state) {
-                if (state is LoginFailure) {
-                  showDialog(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                      title: Text(
-                        "Error while authenticate",
-                        style: TextStyle(fontSize: 18.h),
-                      ),
-                      content: Text(
-                        state.rawError,
-                        style: TextStyle(fontSize: 16.h),
-                      ),
-                      actions: [
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            primary: Colors.black,
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            'OK',
-                            style: TextStyle(fontSize: 14.h),
-                          ),
+          BlocConsumer<LoginBloc, LoginState>(
+            listener: (context, state) {
+              if (state is LoginFailure) {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text(
+                      "Error while authenticate",
+                      style: TextStyle(fontSize: 18.h),
+                    ),
+                    content: Text(
+                      state.rawError,
+                      style: TextStyle(fontSize: 16.h),
+                    ),
+                    actions: [
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          primary: Colors.black,
                         ),
-                      ],
-                    ),
-                  );
-                }
-              },
-              builder: (context, state) {
-                if (state is LoginLoading) {
-                  return Column(children: const [LoadingIndicator()]);
-                } else {
-                  return Column(children: [
-                    submitButton(),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10.h),
-                      child: authSwtich(),
-                    ),
-                  ]);
-                }
-              },
-            ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          'OK',
+                          style: TextStyle(fontSize: 14.h),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              if (state is LoginLoading) {
+                return Column(children: const [LoadingIndicator()]);
+              } else {
+                return Column(children: [
+                  submitButton(),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10.h),
+                    child: authSwtich(),
+                  ),
+                ]);
+              }
+            },
+          ),
         ],
       ),
     );
