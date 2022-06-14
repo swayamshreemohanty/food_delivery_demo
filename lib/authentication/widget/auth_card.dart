@@ -180,23 +180,41 @@ class _AuthCardState extends State<AuthCard>
   authSwtich() => TextButton(
         onPressed: _switchAuthMode,
         style: ButtonStyle(
-            overlayColor: MaterialStateProperty.all(Colors.transparent),
-            backgroundColor: MaterialStateProperty.all(Colors.transparent),
-            foregroundColor: MaterialStateProperty.all(Colors.black),
-            padding: MaterialStateProperty.all(
-              EdgeInsets.symmetric(horizontal: 30.w, vertical: 6.h),
-            ),
-            textStyle: MaterialStateProperty.all(
-              GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                fontSize: 12.5.sp,
-                fontWeight: FontWeight.w500,
-              )),
-            )),
-        child: Text(
-          _authMode == AuthMode.login
-              ? "Don't have an account? SignUp"
-              : 'I have already an account',
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          backgroundColor: MaterialStateProperty.all(Colors.transparent),
+          foregroundColor: MaterialStateProperty.all(Colors.black),
+          padding: MaterialStateProperty.all(
+            EdgeInsets.symmetric(horizontal: 30.w, vertical: 6.h),
+          ),
+        ),
+        child:
+            // _authMode == AuthMode.login
+
+            RichText(
+          text: TextSpan(
+            children: <TextSpan>[
+              TextSpan(
+                text: _authMode == AuthMode.login
+                    ? "Don't have an account? "
+                    : "I have already an account",
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                )),
+              ),
+              TextSpan(
+                text: _authMode == AuthMode.login ? 'Signup' : '',
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).primaryColor,
+                )),
+              ),
+            ],
+          ),
         ),
       );
 
