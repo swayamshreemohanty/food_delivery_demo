@@ -102,7 +102,9 @@ class _BottomLandingScreenState extends State<BottomLandingScreen> {
               ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, CartScreen.routeName);
+        },
         backgroundColor: Colors.white,
         child: const Icon(Icons.shopping_bag_outlined),
       ),

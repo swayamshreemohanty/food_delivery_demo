@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/bottom_bar_content/logic/go_to_home/go_to_home_cubit.dart';
 
 class CartScreen extends StatelessWidget {
+  static const String routeName = '/cart_screen';
+
   const CartScreen({Key? key}) : super(key: key);
 
   Future<bool> willPopScope(BuildContext context) async {
