@@ -21,24 +21,17 @@ class _FoodCatelogCarouselState extends State<FoodCatelogCarousel> {
   Widget build(BuildContext context) => CarouselSlider.builder(
         itemCount: widget.foodlist.length,
         carouselController: _controller,
-        itemBuilder: (_, index, realIndex) => Align(
-          alignment: const Alignment(-1, -1.0),
-          child: FoodCatalog(food: widget.foodlist[index]),
-        ),
+        itemBuilder: (_, index, realIndex) =>
+            FoodCatalog(food: widget.foodlist[index]),
         options: CarouselOptions(
           disableCenter: false,
           viewportFraction: 0.6,
           enlargeCenterPage: true,
-          height: MediaQuery.of(context).size.height,
+          // height: MediaQuery.of(context).size.height,
+          aspectRatio: 9 / 16,
           enableInfiniteScroll: false,
           initialPage: 0,
           enlargeStrategy: CenterPageEnlargeStrategy.height,
-          // onPageChanged: onPageChanged,
-          // viewportFraction: 0.6,
-          // enableInfiniteScroll: false,
-          // enlargeCenterPage: true,
-
-          // onPageChanged: (index, reason) {},
         ),
       );
 }
