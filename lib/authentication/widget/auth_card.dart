@@ -190,12 +190,12 @@ class _AuthCardState extends State<AuthCard>
               GoogleFonts.poppins(
                   textStyle: TextStyle(
                 fontSize: 12.5.sp,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w500,
               )),
             )),
         child: Text(
           _authMode == AuthMode.login
-              ? 'New user? SignUp'
+              ? "Don't have an account? SignUp"
               : 'I have already an account',
         ),
       );
@@ -228,15 +228,20 @@ class _AuthCardState extends State<AuthCard>
     return Form(
       key: _formKey,
       child: SizedBox(
-        height: 400.h,
+        height: 450.h,
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(40.h),
             child: AppBar(
-              elevation: 0,
+              elevation: 0.2,
               automaticallyImplyLeading: false,
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(25.r),
+                ),
+              ),
               flexibleSpace: TabBar(
                 controller: _tabController,
                 indicatorSize: TabBarIndicatorSize.label,
@@ -268,23 +273,26 @@ class _AuthCardState extends State<AuthCard>
               ),
             ),
           ),
-          body: TabBarView(
-            controller: _tabController,
-            children: [
-              LoginWidgets(
-                userEmailTextField: userEmail(),
-                userPasswordTextField: password(),
-                submitButton: submitButton(),
-                authSwitch: authSwtich(),
-              ),
-              SignInWidgets(
-                userEmailTextField: userEmail(),
-                userPasswordTextField: password(),
-                userConfirmPasswordTextField: confirmPassword(),
-                submitButton: submitButton(),
-                authSwitch: authSwtich(),
-              ),
-            ],
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                LoginWidgets(
+                  userEmailTextField: userEmail(),
+                  userPasswordTextField: password(),
+                  submitButton: submitButton(),
+                  authSwitch: authSwtich(),
+                ),
+                SignInWidgets(
+                  userEmailTextField: userEmail(),
+                  userPasswordTextField: password(),
+                  userConfirmPasswordTextField: confirmPassword(),
+                  submitButton: submitButton(),
+                  authSwitch: authSwtich(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -309,6 +317,7 @@ class LoginWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ListView(
         children: [
+          SizedBox(height: 25.h),
           userEmailTextField,
           SizedBox(height: 10.h),
           userPasswordTextField,
@@ -339,6 +348,7 @@ class SignInWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ListView(
         children: [
+          SizedBox(height: 25.h),
           userEmailTextField,
           SizedBox(height: 10.h),
           userPasswordTextField,
