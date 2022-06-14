@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery/bottom_bar_content/home/logic/food_management/foodmanagemet_bloc.dart';
 import 'package:food_delivery/bottom_bar_content/home/widget/app_drawer.dart';
+import 'package:food_delivery/bottom_bar_content/home/widget/food_catalog.dart';
 import 'package:food_delivery/bottom_bar_content/home/widget/food_category.dart';
 import 'package:food_delivery/bottom_bar_content/home/widget/search_bar.dart';
 import 'package:food_delivery/bottom_bar_content/home/widget/shadow_container.dart';
@@ -72,9 +73,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (state is FoodDataLoading) {
                   return const LoadingIndicator();
                 } else if (state is FoodDataFetched) {
+                  final food = state.foodList[0];
                   return Padding(
                     padding: EdgeInsets.only(left: 15.w),
-                    child: FoodCategory(foodCategory: state.foodCategory),
+                    child: Column(
+                      children: [
+                        FoodCategory(foodCategory: state.foodCategory),
+                        SizedBox(height: 20.h),
+                        FoodCatalog(food: food),
+                      ],
+                    ),
                   );
                 } else {
                   return const Center(
