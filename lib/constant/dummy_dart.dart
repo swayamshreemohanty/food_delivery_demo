@@ -2,10 +2,11 @@ class DummyFood {
   static List<Food> dummyFoods = [
     Food(
       id: 'm1',
-      title: 'Spaghetti with Tomato Sauce',
+      title: 'Spaghetti',
+      subtitle: 'Spaghetti with Tomato Sauce',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg/800px-Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg',
-      duration: 20,
+      preprationDuration: 20,
       ingredients: [
         '4 Tomatoes',
         '1 Tablespoon of Olive Oil',
@@ -15,13 +16,17 @@ class DummyFood {
         'Cheese (optional)'
       ],
       details: "This is very delicious",
+      ratings: "3",
+      price: 8,
+      calories: 120,
     ),
     Food(
       id: 'm2',
       title: 'Toast Hawaii',
+      subtitle: 'Toast Hawaii',
       imageUrl:
           'https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg',
-      duration: 10,
+      preprationDuration: 10,
       ingredients: [
         '1 Slice White Bread',
         '1 Slice Ham',
@@ -30,13 +35,17 @@ class DummyFood {
         'Butter'
       ],
       details: "This is very delicious",
+      ratings: "2.8",
+      price: 4,
+      calories: 98,
     ),
     Food(
       id: 'm3',
-      title: 'Classic Hamburger',
+      title: 'Hamburger',
+      subtitle: 'A Classic Hamburger',
       imageUrl:
           'https://cdn.pixabay.com/photo/2014/10/23/18/05/burger-500054_1280.jpg',
-      duration: 45,
+      preprationDuration: 45,
       ingredients: [
         '300g Cattle Hack',
         '1 Tomato',
@@ -46,13 +55,17 @@ class DummyFood {
         '2 Burger Buns'
       ],
       details: "This is very delicious",
+      ratings: "2.4",
+      price: 2,
+      calories: 10,
     ),
     Food(
       id: 'm4',
       title: 'Wiener Schnitzel',
+      subtitle: 'Wiener Schnitzel',
       imageUrl:
           'https://cdn.pixabay.com/photo/2018/03/31/19/29/schnitzel-3279045_1280.jpg',
-      duration: 60,
+      preprationDuration: 60,
       ingredients: [
         '8 Veal Cutlets',
         '4 Eggs',
@@ -64,13 +77,17 @@ class DummyFood {
         'Lemon Slices'
       ],
       details: "This is very delicious",
+      ratings: "3.8",
+      price: 15,
+      calories: 238,
     ),
     Food(
       id: 'm5',
-      title: 'Salad with Smoked Salmon',
+      title: 'Salad',
+      subtitle: 'Salad with Smoked Salmon',
       imageUrl:
           'https://cdn.pixabay.com/photo/2016/10/25/13/29/smoked-salmon-salad-1768890_1280.jpg',
-      duration: 15,
+      preprationDuration: 15,
       ingredients: [
         'Arugula',
         'Lamb\'s Lettuce',
@@ -83,6 +100,9 @@ class DummyFood {
         'Salt and Pepper'
       ],
       details: "This is very delicious",
+      ratings: "2.1",
+      price: 10,
+      calories: 61,
     ),
   ];
 }
@@ -90,21 +110,29 @@ class DummyFood {
 class Food {
   final String id;
   final String title;
+  final String subtitle;
+  final String ratings;
   final String imageUrl;
   final List<String> ingredients;
   final String details;
-  final int duration;
+  final int preprationDuration;
+  final double price;
+  final int calories;
   Food({
     required this.id,
     required this.title,
+    required this.subtitle,
+    required this.ratings,
     required this.imageUrl,
     required this.ingredients,
     required this.details,
-    required this.duration,
+    required this.preprationDuration,
+    required this.price,
+    required this.calories,
   });
 }
 
-class FoodCategory {
+class FoodCategoryList {
   static List<String> foodCategoryList = [
     'Fast food',
     'Fruit item',
