@@ -14,7 +14,9 @@ class FoodCatalog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       color: Colors.transparent,
+      height: 350.h,
       width: 250.w,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -35,73 +37,76 @@ class FoodCatalog extends StatelessWidget {
                       20.w,
                       20.h,
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SizedBox(height: 100.h),
-                        Column(
-                          children: [
-                            Text(
-                              food.title,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.sp,
+                    child: SizedBox(
+                      width: 240.w,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SizedBox(height: 70.h),
+                          Column(
+                            children: [
+                              Text(
+                                food.title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.sp,
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 6.h),
-                            Text(
-                              food.subtitle,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  color: Colors.grey.withOpacity(0.8),
-                                  fontSize: 14.sp,
+                              SizedBox(height: 6.h),
+                              Text(
+                                food.subtitle,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.grey.withOpacity(0.8),
+                                    fontSize: 14.sp,
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 6.h),
-                            Text(
-                              "🔥 ${food.calories} Calories",
-                              style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.red,
-                                  fontSize: 16.sp,
-                                ),
-                              ),
-                            ),
-                            RichText(
-                                text: TextSpan(children: <TextSpan>[
-                              TextSpan(
-                                text: "\$ ",
+                              SizedBox(height: 6.h),
+                              Text(
+                                "🔥 ${food.calories} Calories",
                                 style: GoogleFonts.poppins(
                                   textStyle: TextStyle(
                                     fontWeight: FontWeight.w700,
-                                    color: Colors.amber,
+                                    color: Colors.red,
                                     fontSize: 15.sp,
                                   ),
                                 ),
                               ),
-                              TextSpan(
-                                text: food.price.toString(),
-                                style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black,
-                                    fontSize: 28.sp,
+                              RichText(
+                                  text: TextSpan(children: <TextSpan>[
+                                TextSpan(
+                                  text: "\$ ",
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.amber,
+                                      fontSize: 15.sp,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ]))
-                          ],
-                        )
-                      ],
+                                TextSpan(
+                                  text: food.price.toString(),
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black,
+                                      fontSize: 28.sp,
+                                    ),
+                                  ),
+                                ),
+                              ]))
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -112,8 +117,8 @@ class FoodCatalog extends StatelessWidget {
               left: 0,
               right: 0,
               child: CachedNetworkImage(
-                width: 150.w,
-                height: 150.h,
+                width: 80.w,
+                height: 120.h,
                 imageUrl: food.imageUrl,
                 fit: BoxFit.fitHeight,
                 progressIndicatorBuilder: (context, url, downloadProgress) =>
