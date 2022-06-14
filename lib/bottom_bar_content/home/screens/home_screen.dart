@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_delivery/bottom_bar_content/home/widget/food_catalog_carousel.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:food_delivery/bottom_bar_content/home/logic/food_management/foodmanagemet_bloc.dart';
 import 'package:food_delivery/bottom_bar_content/home/widget/app_drawer.dart';
-import 'package:food_delivery/bottom_bar_content/home/widget/food_catalog.dart';
 import 'package:food_delivery/bottom_bar_content/home/widget/food_category.dart';
 import 'package:food_delivery/bottom_bar_content/home/widget/search_bar.dart';
 import 'package:food_delivery/bottom_bar_content/home/widget/shadow_container.dart';
 import 'package:food_delivery/utility/firebase_current_user_data.dart';
 import 'package:food_delivery/utility/loading_indicator.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     context.read<FoodmanagemetBloc>().add(FetchFoodsDetailsForHome());
@@ -32,8 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
         drawer: AppDrawer(
           userDetails: FirebaseCurrentUserData().userDetails!,
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        body: ListView(
+          padding: EdgeInsets.zero,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 40.h),
             Padding(
@@ -73,14 +75,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (state is FoodDataLoading) {
                   return const LoadingIndicator();
                 } else if (state is FoodDataFetched) {
-                  final food = state.foodList[0];
                   return Padding(
                     padding: EdgeInsets.only(left: 15.w),
                     child: Column(
                       children: [
                         FoodCategory(foodCategory: state.foodCategory),
                         SizedBox(height: 20.h),
-                        FoodCatalog(food: food),
+                        FoodCatelogCarousel(foodlist: state.foodList),
                       ],
                     ),
                   );
