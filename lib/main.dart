@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery/authentication/logic/authentication/authentication_bloc.dart';
 import 'package:food_delivery/authentication/logic/login/login_bloc.dart';
 import 'package:food_delivery/authentication/screen/authscreen.dart';
+import 'package:food_delivery/bottom_bar_content/home/logic/food_management/foodmanagemet_bloc.dart';
+import 'package:food_delivery/bottom_bar_content/home/logic/selected_food_category/selected_food_category_cubit.dart';
 import 'package:food_delivery/bottom_bar_content/logic/go_to_home/go_to_home_cubit.dart';
 import 'package:food_delivery/bottom_bar_content/screen/bottom_landing_screen.dart';
 import 'package:food_delivery/config/routes/application_page_routes.dart';
@@ -52,6 +54,12 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider<GoToHomeCubit>(
           create: (context) => GoToHomeCubit(),
+        ),
+        BlocProvider<FoodmanagemetBloc>(
+          create: (context) => FoodmanagemetBloc(),
+        ),
+        BlocProvider<SelectedFoodCategoryCubit>(
+          create: (context) => SelectedFoodCategoryCubit(),
         ),
       ],
       child: ScreenUtilInit(
