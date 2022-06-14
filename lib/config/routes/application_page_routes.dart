@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/bottom_bar_content/food_details/screen/food_details_screen.dart';
 import 'package:food_delivery/utility/loading_indicator.dart';
 
 class ScreenRouter {
@@ -8,12 +9,12 @@ class ScreenRouter {
     String? routeName = routeSettings.name;
 
     switch (routeName) {
-      // case ContactCenterScreen.routeName:
-      //   return MaterialPageRoute(
-      //     settings: RouteSettings(arguments: routeSettings.arguments),
-      //     builder: (_) => const ContactCenterScreen(),
-      //   );
-      //
+      case FoodDetailsScreen.routeName:
+        return MaterialPageRoute(
+          settings: RouteSettings(arguments: routeSettings.arguments),
+          builder: (_) => const FoodDetailsScreen(),
+        );
+      
 
 
       default:
