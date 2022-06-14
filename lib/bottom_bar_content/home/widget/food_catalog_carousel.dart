@@ -27,7 +27,6 @@ class _FoodCatelogCarouselState extends State<FoodCatelogCarousel> {
           disableCenter: false,
           viewportFraction: 0.6,
           enlargeCenterPage: true,
-          // height: MediaQuery.of(context).size.height,
           aspectRatio: 9 / 16,
           enableInfiniteScroll: false,
           initialPage: widget.foodlist.length > 1 ? 1 : 0,
