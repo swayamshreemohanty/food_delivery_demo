@@ -29,32 +29,42 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Colors.grey.shade100,
         key: _scaffoldkey,
         drawer: AppDrawer(
           userDetails: FirebaseCurrentUserData().userDetails!,
         ),
         body: ListView(
           padding: EdgeInsets.zero,
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 40.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.w),
-              child: Row(children: [
-                ShadowContainer(
-                  opacity: 0.2,
-                  offset: const Offset(0.8, 8),
-                  backgroundColor: Colors.white,
-                  child: IconButton(
-                      iconSize: 25.sp,
-                      onPressed: () {
-                        _scaffoldkey.currentState!.openDrawer();
-                      },
-                      icon: const Icon(
-                        Icons.menu,
-                      )),
-                ),
-              ]),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ShadowContainer(
+                      opacity: 0.2,
+                      offset: const Offset(0.8, 8),
+                      backgroundColor: Colors.white,
+                      child: IconButton(
+                          iconSize: 25.sp,
+                          onPressed: () {
+                            _scaffoldkey.currentState!.openDrawer();
+                          },
+                          icon: const Icon(
+                            Icons.menu,
+                          )),
+                    ),
+                    ShadowContainer(
+                      child: Image.asset(
+                        'assets/person.png',
+                        height: 45.h,
+                        width: 45.w,
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
+                  ]),
             ),
             SizedBox(height: 20.h),
             Padding(
