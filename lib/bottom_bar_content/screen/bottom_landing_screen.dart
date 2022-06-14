@@ -77,9 +77,7 @@ class _BottomLandingScreenState extends State<BottomLandingScreen> {
                     icon: const Icon(
                       Icons.house_outlined,
                     ),
-                    // selectedIcon: const Icon(Icons.house_rounded),
                     selectedColor: Theme.of(context).primaryColor,
-                    // backgroundColor: Colors.amber,
                     title: const Text(''),
                   ),
                   AnimatedBarItems(
@@ -88,11 +86,6 @@ class _BottomLandingScreenState extends State<BottomLandingScreen> {
                     title: const Text(''),
                     selectedColor: Theme.of(context).primaryColor,
                   ),
-                  // AnimatedBarItems(
-                  //   backgroundColor: Colors.white,
-                  //   icon: const Icon(Icons.shopping_bag_outlined),
-                  //   title: const Text(''),
-                  // ),
                   AnimatedBarItems(
                     backgroundColor: Colors.white,
                     icon: const Icon(Icons.bookmark),
