@@ -118,10 +118,16 @@ class _AuthCardState extends State<AuthCard>
         //it is used to hide the character during password entry.
         obscureText: _showPassword ? false : true,
         validator: (value) {
+          RegExp regex = RegExp(
+              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
           if (value!.isEmpty) {
             return "Field can't be empty";
           } else {
-            return null;
+            if (!regex.hasMatch(value)) {
+              return 'Your Password should:\ncontain at least one upper case.\ncontain at least one lower case.\ncontain at least one digit.\ncontain at least one Special character.\nat least 8 characters in length.';
+            } else {
+              return null;
+            }
           }
         },
         onSaved: (value) {
