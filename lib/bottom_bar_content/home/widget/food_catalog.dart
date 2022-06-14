@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_delivery/bottom_bar_content/food_details/logic/food_add_counter/foodaddcounter_cubit.dart';
 import 'package:food_delivery/bottom_bar_content/food_details/screen/food_details_screen.dart';
 import 'package:food_delivery/constant/dummy_dart.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,6 +18,7 @@ class FoodCatalog extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        context.read<FoodaddcounterCubit>().resetCounter();
         Navigator.pushNamed(
           context,
           FoodDetailsScreen.routeName,
