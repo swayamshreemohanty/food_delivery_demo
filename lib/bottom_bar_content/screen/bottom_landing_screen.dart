@@ -37,10 +37,8 @@ class _BottomLandingScreenState extends State<BottomLandingScreen> {
       case 1:
         return const ArticlesScreen();
       case 2:
-        return const CartScreen();
-      case 3:
         return const BookMarkScreen();
-      case 4:
+      case 3:
         return const ActivityScreen();
       default:
         return const HomeScreen();
