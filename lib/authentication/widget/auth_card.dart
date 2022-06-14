@@ -1,8 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:food_delivery/authentication/logic/login/login_bloc.dart';
 import 'package:food_delivery/utility/enums.dart';
 import 'package:food_delivery/utility/loading_indicator.dart';
@@ -18,12 +21,10 @@ class AuthCard extends StatefulWidget {
 
 class _AuthCardState extends State<AuthCard>
     with SingleTickerProviderStateMixin {
-  TextStyle defaultStyle = TextStyle(color: Colors.grey, fontSize: 12.sp);
-  TextStyle linkStyle = const TextStyle(color: Colors.blue);
   final GlobalKey<FormState> _formKey = GlobalKey();
   final _userEmailController = TextEditingController();
   final _passwordController = TextEditingController();
-
+  late TabController _tabController;
   AuthMode _authMode = AuthMode.login;
   var _showPassword = false;
   var _showConfirmPassword = false;
@@ -40,14 +41,6 @@ class _AuthCardState extends State<AuthCard>
       _showConfirmPassword = !_showConfirmPassword;
     });
     return _showConfirmPassword;
-  }
-
-  @override
-  void dispose() {
-    _userEmailController.dispose();
-    _passwordController.dispose();
-
-    super.dispose();
   }
 
   Future<void> _submit() async {
@@ -71,28 +64,25 @@ class _AuthCardState extends State<AuthCard>
   }
 
   void _switchAuthMode() {
-    if (_authMode == AuthMode.login) {
-      setState(() {
-        _authMode = AuthMode.signup;
-      });
-    } else {
-      setState(() {
-        _authMode = AuthMode.login;
-      });
-    }
+    _tabController.animateTo(_authMode == AuthMode.login ? 1 : 0);
   }
 
-  userEmail() => TextFormField(
+  TextStyle textFieldTextStyle = GoogleFonts.poppins(
+    textStyle: TextStyle(
+      fontWeight: FontWeight.w400,
+      fontSize: 14.sp,
+      color: Colors.black,
+    ),
+  );
+
+  TextFormField userEmail() => TextFormField(
         key: const ValueKey('Email'),
         controller: _userEmailController,
         autofillHints: const [AutofillHints.email],
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          hintText: 'Email',
-          contentPadding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(32.0),
-          ),
+          labelText: 'Email Address',
+          labelStyle: textFieldTextStyle,
         ),
         cursorColor: Colors.black,
         keyboardType: TextInputType.emailAddress,
@@ -108,23 +98,20 @@ class _AuthCardState extends State<AuthCard>
           _userEmailController.text = value!.trim();
         },
       );
-  password() => TextFormField(
+  TextFormField password() => TextFormField(
         key: const ValueKey('Password'),
         autofillHints: const [AutofillHints.password],
         textInputAction: TextInputAction.done,
         controller: _passwordController,
         autofocus: false,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
-          hintText: 'Password',
+          labelText: 'Password',
+          labelStyle: textFieldTextStyle,
           suffixIcon: IconButton(
             onPressed: showPassword,
             icon: _showPassword
                 ? const Icon(Icons.visibility_off)
                 : const Icon(Icons.visibility),
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(32.0),
           ),
         ),
         cursorColor: Colors.black,
@@ -141,21 +128,18 @@ class _AuthCardState extends State<AuthCard>
           _passwordController.text = value!.trim();
         },
       );
-  confirmPassword() => TextFormField(
+  TextFormField confirmPassword() => TextFormField(
         key: const ValueKey('Confirm password'),
         enabled: _authMode == AuthMode.signup,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          hintText: 'Confirm password',
-          contentPadding: const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+          labelText: 'Confirm password',
+          labelStyle: textFieldTextStyle,
           suffixIcon: IconButton(
             onPressed: showConfirmPassword,
             icon: _showConfirmPassword
                 ? const Icon(Icons.visibility_off)
                 : const Icon(Icons.visibility),
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(32.0),
           ),
         ),
         cursorColor: Colors.black,
@@ -181,16 +165,11 @@ class _AuthCardState extends State<AuthCard>
           )),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.r),
+              borderRadius: BorderRadius.circular(12.r),
             ),
           ),
-          // backgroundColor:
-          //     MaterialStateProperty.all(UiColors.logInButtonBackground),
-          // foregroundColor:
-          //     MaterialStateProperty.all(UiColors.logInButtonForeground),
           textStyle: MaterialStateProperty.all(TextStyle(
             fontWeight: FontWeight.w700,
-            // fontSize: authTextresponsiveFontSize(currentFontSize: 16),
             fontSize: 15.sp,
             fontFamily: 'Lato',
           )),
@@ -201,82 +180,232 @@ class _AuthCardState extends State<AuthCard>
   authSwtich() => TextButton(
         onPressed: _switchAuthMode,
         style: ButtonStyle(
-          overlayColor: MaterialStateProperty.all(Colors.transparent),
-          backgroundColor: MaterialStateProperty.all(Colors.transparent),
-          foregroundColor: MaterialStateProperty.all(Colors.black),
-          padding: MaterialStateProperty.all(
-            EdgeInsets.symmetric(horizontal: 30.w, vertical: 6.h),
-          ),
-          textStyle: MaterialStateProperty.all(TextStyle(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w700,
-            fontFamily: 'Lato',
-          )),
-        ),
+            overlayColor: MaterialStateProperty.all(Colors.transparent),
+            backgroundColor: MaterialStateProperty.all(Colors.transparent),
+            foregroundColor: MaterialStateProperty.all(Colors.black),
+            padding: MaterialStateProperty.all(
+              EdgeInsets.symmetric(horizontal: 30.w, vertical: 6.h),
+            ),
+            textStyle: MaterialStateProperty.all(
+              GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                fontSize: 12.5.sp,
+                fontWeight: FontWeight.w700,
+              )),
+            )),
         child: Text(
           _authMode == AuthMode.login
-              ? 'New user? Sign up here'
+              ? 'New user? SignUp'
               : 'I have already an account',
         ),
       );
+
+  void _setActiveTabIndex() {
+    setState(() {
+      _authMode = _tabController.index == 0 ? AuthMode.login : AuthMode.signup;
+    });
+  }
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(_setActiveTabIndex);
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _userEmailController.dispose();
+    _passwordController.dispose();
+    _tabController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          userEmail(),
-          password(),
-          if (_authMode == AuthMode.signup) confirmPassword(),
-          BlocConsumer<LoginBloc, LoginState>(
-            listener: (context, state) {
-              if (state is LoginFailure) {
-                showDialog(
-                  context: context,
-                  builder: (ctx) => AlertDialog(
-                    title: Text(
-                      "Error while authenticate",
-                      style: TextStyle(fontSize: 18.h),
-                    ),
-                    content: Text(
-                      state.rawError,
-                      style: TextStyle(fontSize: 16.h),
-                    ),
-                    actions: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          primary: Colors.black,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          'OK',
-                          style: TextStyle(fontSize: 14.h),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-            },
-            builder: (context, state) {
-              if (state is LoginLoading) {
-                return Column(children: const [LoadingIndicator()]);
-              } else {
-                return Column(children: [
-                  submitButton(),
+      child: SizedBox(
+        height: 400.h,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(40.h),
+            child: AppBar(
+              elevation: 0,
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.transparent,
+              flexibleSpace: TabBar(
+                controller: _tabController,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicatorWeight: 1.5,
+                tabs: [
                   Padding(
-                    padding: EdgeInsets.only(top: 10.h),
-                    child: authSwtich(),
+                    padding: EdgeInsets.only(bottom: 15.h),
+                    child: Text(
+                      'Login',
+                      style: GoogleFonts.poppins(
+                        letterSpacing: 1.0,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
-                ]);
-              }
-            },
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 15.h),
+                    child: Text(
+                      'Signup',
+                      style: GoogleFonts.poppins(
+                        letterSpacing: 1.0,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          body: TabBarView(
+            controller: _tabController,
+            children: [
+              LoginWidgets(
+                userEmailTextField: userEmail(),
+                userPasswordTextField: password(),
+                submitButton: submitButton(),
+                authSwitch: authSwtich(),
+              ),
+              SignInWidgets(
+                userEmailTextField: userEmail(),
+                userPasswordTextField: password(),
+                userConfirmPasswordTextField: confirmPassword(),
+                submitButton: submitButton(),
+                authSwitch: authSwtich(),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LoginWidgets extends StatelessWidget {
+  final TextFormField userEmailTextField;
+  final TextFormField userPasswordTextField;
+  final Widget submitButton;
+  final Widget authSwitch;
+
+  const LoginWidgets({
+    Key? key,
+    required this.userEmailTextField,
+    required this.userPasswordTextField,
+    required this.submitButton,
+    required this.authSwitch,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => ListView(
+        children: [
+          userEmailTextField,
+          SizedBox(height: 10.h),
+          userPasswordTextField,
+          SizedBox(height: 40.h),
+          SubmitButtonBuilder(
+            submitButton: submitButton,
+            authSwitch: authSwitch,
           ),
         ],
-      ),
+      );
+}
+
+class SignInWidgets extends StatelessWidget {
+  final TextFormField userEmailTextField;
+  final TextFormField userPasswordTextField;
+  final TextFormField userConfirmPasswordTextField;
+  final Widget submitButton;
+  final Widget authSwitch;
+  const SignInWidgets({
+    Key? key,
+    required this.userEmailTextField,
+    required this.userPasswordTextField,
+    required this.userConfirmPasswordTextField,
+    required this.submitButton,
+    required this.authSwitch,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => ListView(
+        children: [
+          userEmailTextField,
+          SizedBox(height: 10.h),
+          userPasswordTextField,
+          SizedBox(height: 10.h),
+          userConfirmPasswordTextField,
+          SizedBox(height: 40.h),
+          SubmitButtonBuilder(
+            submitButton: submitButton,
+            authSwitch: authSwitch,
+          ),
+        ],
+      );
+}
+
+class SubmitButtonBuilder extends StatelessWidget {
+  final Widget submitButton;
+  final Widget authSwitch;
+  const SubmitButtonBuilder({
+    Key? key,
+    required this.submitButton,
+    required this.authSwitch,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state is LoginFailure) {
+          showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: Text(
+                "Error while authenticate",
+                style: TextStyle(fontSize: 18.h),
+              ),
+              content: Text(
+                state.rawError,
+                style: TextStyle(fontSize: 16.h),
+              ),
+              actions: [
+                TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    'OK',
+                    style: TextStyle(fontSize: 14.h),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is LoginLoading) {
+          return Column(children: const [LoadingIndicator()]);
+        } else {
+          return Column(children: [
+            submitButton,
+            authSwitch,
+          ]);
+        }
+      },
     );
   }
 }
