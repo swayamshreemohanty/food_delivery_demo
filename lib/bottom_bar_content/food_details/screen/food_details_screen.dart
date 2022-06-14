@@ -88,7 +88,7 @@ class FoodDetailsScreen extends StatelessWidget {
                               // padding: EdgeInsets.zero,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(height: 60.h),
+                                SizedBox(height: 40.h),
                                 Row(
                                   children: [
                                     Expanded(
@@ -234,7 +234,8 @@ class FoodDetailsScreen extends StatelessWidget {
                                           )),
                                     ),
                                   ),
-                                )
+                                ),
+                                SizedBox(height: 10.h),
                               ],
                             ),
                           ),
