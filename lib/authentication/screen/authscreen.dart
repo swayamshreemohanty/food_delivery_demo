@@ -11,10 +11,11 @@ class AuthScreen extends StatelessWidget {
     // final _deviceSize = MediaQuery.of(context).size;
 
     final logo = SizedBox(
-      height: 200.h,
-      width: 250.w,
+      height: 380.h,
+      width: 400.w,
       child: Image.asset(
-        'assets/splash_screen_logo.png',
+        'assets/auth_screen_logo.png',
+        fit: BoxFit.fitHeight,
       ),
     );
 
@@ -31,6 +32,7 @@ class AuthScreen extends StatelessWidget {
                 children: <Widget>[
                   SizedBox(height: 40.h),
                   logo,
+                  SizedBox(height: 10.h),
                   const Padding(
                     padding: EdgeInsets.all(10),
                     child: AuthCard(),
