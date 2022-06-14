@@ -7,7 +7,6 @@ import 'package:food_delivery/demo_screens/activity_screen.dart';
 import 'package:food_delivery/demo_screens/articles_screen.dart';
 import 'package:food_delivery/demo_screens/bookmark_screen.dart';
 import 'package:food_delivery/demo_screens/cart_screen.dart';
-import 'package:food_delivery/utility/tools/responsive_handler.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 
 class BottomLandingScreen extends StatefulWidget {
@@ -57,47 +56,45 @@ class _BottomLandingScreenState extends State<BottomLandingScreen> {
             selectPageIndex(state.index);
           }
         },
-        child: ResponsiveWidget.isDesktop(context)
-            ? const SizedBox.shrink()
-            : StylishBottomBar(
-                onTap: (index) {
-                  selectPageIndex(index ?? 0);
-                },
-                iconSize: 30.sp,
-                opacity: 0.3,
-                currentIndex: _selectedPageIndex,
-                barAnimation: BarAnimation.fade,
-                iconStyle: IconStyle.Default,
-                hasNotch: true,
-                fabLocation: StylishBarFabLocation.center,
-                items: [
-                  AnimatedBarItems(
-                    icon: const Icon(
-                      Icons.house_outlined,
-                    ),
-                    selectedColor: Theme.of(context).primaryColor,
-                    title: const Text(''),
-                  ),
-                  AnimatedBarItems(
-                    backgroundColor: Colors.white,
-                    icon: const Icon(Icons.book),
-                    title: const Text(''),
-                    selectedColor: Theme.of(context).primaryColor,
-                  ),
-                  AnimatedBarItems(
-                    backgroundColor: Colors.white,
-                    icon: const Icon(Icons.bookmark),
-                    title: const Text(''),
-                    selectedColor: Theme.of(context).primaryColor,
-                  ),
-                  AnimatedBarItems(
-                    backgroundColor: Colors.white,
-                    icon: const Icon(Icons.notifications),
-                    title: const Text(''),
-                    selectedColor: Theme.of(context).primaryColor,
-                  ),
-                ],
+        child: StylishBottomBar(
+          onTap: (index) {
+            selectPageIndex(index ?? 0);
+          },
+          iconSize: 30.sp,
+          opacity: 0.3,
+          currentIndex: _selectedPageIndex,
+          barAnimation: BarAnimation.fade,
+          iconStyle: IconStyle.Default,
+          hasNotch: true,
+          fabLocation: StylishBarFabLocation.center,
+          items: [
+            AnimatedBarItems(
+              icon: const Icon(
+                Icons.house_outlined,
               ),
+              selectedColor: Theme.of(context).primaryColor,
+              title: const Text(''),
+            ),
+            AnimatedBarItems(
+              backgroundColor: Colors.white,
+              icon: const Icon(Icons.book),
+              title: const Text(''),
+              selectedColor: Theme.of(context).primaryColor,
+            ),
+            AnimatedBarItems(
+              backgroundColor: Colors.white,
+              icon: const Icon(Icons.bookmark),
+              title: const Text(''),
+              selectedColor: Theme.of(context).primaryColor,
+            ),
+            AnimatedBarItems(
+              backgroundColor: Colors.white,
+              icon: const Icon(Icons.notifications),
+              title: const Text(''),
+              selectedColor: Theme.of(context).primaryColor,
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
