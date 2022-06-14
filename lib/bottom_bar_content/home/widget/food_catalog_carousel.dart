@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery/bottom_bar_content/home/widget/food_catalog.dart';
 import 'package:food_delivery/constant/dummy_dart.dart';
 
@@ -27,7 +28,7 @@ class _FoodCatelogCarouselState extends State<FoodCatelogCarousel> {
           disableCenter: false,
           viewportFraction: 0.6,
           enlargeCenterPage: true,
-          aspectRatio: 9 / 16,
+          height: 400.h,
           enableInfiniteScroll: false,
           initialPage: widget.foodlist.length > 1 ? 1 : 0,
           enlargeStrategy: CenterPageEnlargeStrategy.height,

@@ -92,7 +92,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           FoodCategory(foodCategory: state.foodCategory),
                           SizedBox(height: 20.h),
-                          FoodCatelogCarousel(foodlist: state.foodList),
+                          FoodCatelogCarousel(
+                            foodlist: state.foodList,
+                          ),
                         ],
                       ),
                     );
