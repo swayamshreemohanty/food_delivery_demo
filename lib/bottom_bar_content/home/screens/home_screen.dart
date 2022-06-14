@@ -75,19 +75,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (state is FoodDataLoading) {
                   return const LoadingIndicator();
                 } else if (state is FoodDataFetched) {
-                  return Padding(
-                    padding: EdgeInsets.only(left: 15.w),
-                    child: Column(
-                      children: [
-                        FoodCategory(foodCategory: state.foodCategory),
-                        SizedBox(height: 20.h),
-                        FoodCatelogCarousel(foodlist: state.foodList),
-                      ],
-                    ),
-                  );
+                  if (state.foodList.isNotEmpty) {
+                    return Padding(
+                      padding: EdgeInsets.only(left: 15.w),
+                      child: Column(
+                        children: [
+                          FoodCategory(foodCategory: state.foodCategory),
+                          SizedBox(height: 20.h),
+                          FoodCatelogCarousel(foodlist: state.foodList),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text('No food found.'),
+                    );
+                  }
                 } else {
                   return const Center(
-                    child: Text('No Data found'),
+                    child: Text('Something went wrong.'),
                   );
                 }
               },
