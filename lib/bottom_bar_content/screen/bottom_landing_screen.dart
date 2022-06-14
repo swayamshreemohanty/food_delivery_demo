@@ -53,8 +53,6 @@ class _BottomLandingScreenState extends State<BottomLandingScreen> {
       body: _gotoPage(),
       bottomNavigationBar: BlocListener<GoToHomeCubit, GoToHomeState>(
         listener: (_, state) {
-          print('*********************');
-          print(state);
           if (state is GoToHomeTriggered) {
             selectPageIndex(0);
           } else if (state is GoToIndex) {
@@ -67,20 +65,20 @@ class _BottomLandingScreenState extends State<BottomLandingScreen> {
                 onTap: (index) {
                   selectPageIndex(index ?? 0);
                 },
-                iconSize: 35.sp,
+                iconSize: 30.sp,
                 opacity: 0.3,
                 currentIndex: _selectedPageIndex,
                 barAnimation: BarAnimation.fade,
-                iconStyle: IconStyle.animated,
+                iconStyle: IconStyle.Default,
                 hasNotch: true,
-                // fabLocation: StylishBarFabLocation.center,
+                fabLocation: StylishBarFabLocation.center,
                 items: [
                   AnimatedBarItems(
                     icon: const Icon(
                       Icons.house_outlined,
                     ),
                     // selectedIcon: const Icon(Icons.house_rounded),
-                    // selectedColor: Colors.deepPurple,
+                    selectedColor: Theme.of(context).primaryColor,
                     // backgroundColor: Colors.amber,
                     title: const Text(''),
                   ),
@@ -88,25 +86,34 @@ class _BottomLandingScreenState extends State<BottomLandingScreen> {
                     backgroundColor: Colors.white,
                     icon: const Icon(Icons.book),
                     title: const Text(''),
+                    selectedColor: Theme.of(context).primaryColor,
                   ),
-                  AnimatedBarItems(
-                    backgroundColor: Colors.white,
-                    icon: const Icon(Icons.shopping_bag_outlined),
-                    title: const Text(''),
-                  ),
+                  // AnimatedBarItems(
+                  //   backgroundColor: Colors.white,
+                  //   icon: const Icon(Icons.shopping_bag_outlined),
+                  //   title: const Text(''),
+                  // ),
                   AnimatedBarItems(
                     backgroundColor: Colors.white,
                     icon: const Icon(Icons.bookmark),
                     title: const Text(''),
+                    selectedColor: Theme.of(context).primaryColor,
                   ),
                   AnimatedBarItems(
                     backgroundColor: Colors.white,
                     icon: const Icon(Icons.notifications),
                     title: const Text(''),
+                    selectedColor: Theme.of(context).primaryColor,
                   ),
                 ],
               ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.white,
+        child: const Icon(Icons.shopping_bag_outlined),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
