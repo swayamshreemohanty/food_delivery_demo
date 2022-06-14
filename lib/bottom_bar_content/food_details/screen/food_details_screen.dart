@@ -74,186 +74,173 @@ class FoodDetailsScreen extends StatelessWidget {
             Expanded(
               child: Stack(
                 children: [
-                  Column(
-                    children: [
-                      SizedBox(height: 25.h),
-                      Expanded(
-                        child: Container(
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 25.h),
+                        Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(30.r)),
-                          child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20.w),
-                              child: Column(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(height: 60.h),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 3,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20.w),
+                            child: Column(
+                              // padding: EdgeInsets.zero,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 60.h),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 3,
+                                      child: Text(
+                                        selectedFood.title,
+                                        style: GoogleFonts.poppins(
+                                          textStyle: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 22.sp,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                            text: "\$ ",
+                                            style: GoogleFonts.poppins(
+                                              textStyle: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.amber,
+                                                fontSize: 18.sp,
+                                              ),
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: selectedFood.price.toString(),
+                                            style: GoogleFonts.poppins(
+                                              textStyle: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.black,
+                                                fontSize: 30.sp,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 20.h),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      "⭐ ${selectedFood.ratings}",
+                                      style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      "🔥 ${selectedFood.calories} Calories",
+                                      style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      "⏰ ${selectedFood.preprationDuration} min",
+                                      style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 30.h),
+                                Text(
+                                  'Details',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.sp,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 8.h),
+                                Text(
+                                  selectedFood.details,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.grey.withOpacity(0.8),
+                                      fontSize: 14.sp,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 30.h),
+                                Text(
+                                  'Ingredients',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.sp,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10.h),
+                                SizedBox(
+                                  height: 40.h,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: selectedFood.ingredients.length,
+                                    itemBuilder: (_, index) => Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 4.w,
+                                      ),
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(width: 0.2),
+                                            borderRadius:
+                                                BorderRadius.circular(10.r),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10.w,
+                                                vertical: 5.h),
                                             child: Text(
-                                              selectedFood.title,
+                                              selectedFood.ingredients[index],
                                               style: GoogleFonts.poppins(
                                                 textStyle: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 22.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 12.sp,
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          const Spacer(),
-                                          RichText(
-                                            text: TextSpan(
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                  text: "\$ ",
-                                                  style: GoogleFonts.poppins(
-                                                    textStyle: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Colors.amber,
-                                                      fontSize: 18.sp,
-                                                    ),
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                  text: selectedFood.price
-                                                      .toString(),
-                                                  style: GoogleFonts.poppins(
-                                                    textStyle: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Colors.black,
-                                                      fontSize: 30.sp,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 20.h),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text(
-                                            "⭐ ${selectedFood.ratings}",
-                                            style: GoogleFonts.poppins(
-                                              textStyle: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 14.sp,
-                                              ),
-                                            ),
-                                          ),
-                                          Text(
-                                            "🔥 ${selectedFood.calories} Calories",
-                                            style: GoogleFonts.poppins(
-                                              textStyle: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 14.sp,
-                                              ),
-                                            ),
-                                          ),
-                                          Text(
-                                            "⏰ ${selectedFood.preprationDuration} min",
-                                            style: GoogleFonts.poppins(
-                                              textStyle: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 14.sp,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 30.h),
-                                      Text(
-                                        'Details',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18.sp,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(height: 8.h),
-                                      Text(
-                                        selectedFood.details,
-                                        maxLines: 3,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                            fontWeight: FontWeight.w300,
-                                            color: Colors.grey.withOpacity(0.8),
-                                            fontSize: 14.sp,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(height: 30.h),
-                                      Text(
-                                        'Ingredients',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18.sp,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(height: 10.h),
-                                      SizedBox(
-                                        height: 40.h,
-                                        child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          itemCount:
-                                              selectedFood.ingredients.length,
-                                          itemBuilder: (_, index) => Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 2.w),
-                                            child: Container(
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                  border:
-                                                      Border.all(width: 0.2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.r),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: 10.w,
-                                                      vertical: 5.h),
-                                                  child: Text(
-                                                    selectedFood
-                                                        .ingredients[index],
-                                                    style: GoogleFonts.poppins(
-                                                      textStyle: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 12.sp,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                )),
-                                          ),
-                                        ),
-                                      )
-                                    ],
+                                          )),
+                                    ),
                                   ),
-                                ],
-                              ),
+                                )
+                              ],
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const Align(
                     alignment: Alignment.topCenter,
