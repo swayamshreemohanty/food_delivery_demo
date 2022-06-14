@@ -12,7 +12,7 @@ class FoodmanagemetBloc extends Bloc<FoodmanagemetEvent, FoodmanagemetState> {
           emit(FoodDataLoading());
           emit(FoodDataFetched(
             foodList: DummyFood.dummyFoods,
-            foodCategory: FoodCategory.foodCategoryList,
+            foodCategory: FoodCategoryList.foodCategoryList,
           ));
         } catch (e) {
           emit(FoodDataFetchFailed());
